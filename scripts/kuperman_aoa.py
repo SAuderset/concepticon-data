@@ -30,7 +30,7 @@ for i in range(1, sheet.nrows):
     if gloss in mappings['en']: 
         best_match, priority = sorted( 
             mappings['en'][gloss], 
-            key=lambda x: x[1])[0] 
+            key=lambda x: (x[1], x[0]))[0] 
         data[best_match] += [[ 
             str(i), 
             gloss, 
@@ -54,7 +54,7 @@ with open('kuperman_aoa.tsv', 'w') as f:
             "DUNNO",
             "LINE_IN_SOURCE"])+'\n')
     for key, lines in data.items(): 
-        best_line = sorted(lines, key=lambda x: x[-1])[0] 
+        best_line = sorted(lines, key=lambda x: (x[-1], x[-2]))[0] 
         best_line[-1] = str(best_line[-1]) 
         f.write('\t'.join([
             best_line[-2], # concepticon id
