@@ -51,11 +51,22 @@ with open('kuperman_aoa.tsv', 'w') as f:
             "FREQ_PM",
             "RATING_MEAN",
             "RATING_SD",
-            "DUNNO"])+'\n')
+            "DUNNO",
+            "LINE_IN_SOURCE"])+'\n')
     for key, lines in data.items(): 
         best_line = sorted(lines, key=lambda x: x[-1])[0] 
         best_line[-1] = str(best_line[-1]) 
-        f.write('\t'.join(best_line)+'\n')
+        f.write('\t'.join([
+            best_line[-2], # concepticon id
+            best_line[1],
+            best_line[2], 
+            best_line[3],
+            best_line[4],
+            best_line[5],
+            best_line[6],
+            best_line[7],
+            best_line[0]
+            ])+'\n')
 
 
 print('Found {0} direct matches in data.'.format(len(data)))
